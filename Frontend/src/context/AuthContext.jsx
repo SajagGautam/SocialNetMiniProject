@@ -7,22 +7,29 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    try {
-      const decoded = jwtDecode(token);
-      setUser({ id: decoded.id });
-    } catch (err) {
-      localStorage.removeItem("token");
+  const loadUser = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUser({ id: decoded.id });
+      } catch (err) {
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    } else {
+      setUser(null);
     }
-  }
-}, []);
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   const login = async (username, password) => {
     const res = await API.post("/login", { username, password });
     localStorage.setItem("token", res.data.token);
-    setUser({ id: jwtDecode(res.data.token).id });
+    loadUser();
   };
 
   const register = async (username, password) => {
