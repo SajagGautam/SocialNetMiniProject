@@ -24,7 +24,7 @@ const Navbar = () => {
                 </Link>
                 <button
                   onClick={() => { logout(); navigate("/login"); }}
-                  className="bg-white text-blue-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition"
+                  className="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition"
                 >
                   Logout
                 </button>

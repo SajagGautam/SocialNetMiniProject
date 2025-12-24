@@ -35,7 +35,7 @@ const PostCard = ({ post, onUpdate }) => {
         <div>
           <Link
             to={`/profile/${post.author._id}`}
-            className="text-2xl font-bold text-indigo-600 hover:underline"
+            className="text-2xl font-bold text-purple-600 hover:underline"
           >
             {post.author.username}
           </Link>
